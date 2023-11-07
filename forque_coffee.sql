@@ -128,7 +128,26 @@ values
 insert into "productCategories" ("product_id","categorie_id")
 values (1,1),(2,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1);
 
-select "name_product" as "productName","price"  from "products" where "name_product" ilike '%%' ; 
+select "name_product" as "ProductName" ,"price" from "products";
+
+
+select "p"."name_product","price", "c"."name" as "categoryName" from "products" "p" 
+join "productCategories" "pc" on "pc"."product_id" = "p"."id" 
+join "categories" "c" on "c"."id" = "pc"."categorie_id" ; 
+
+--left Join
+select "p"."name_product", "price", "c"."name" as "categoryName"
+from "products" "p"
+left join "productCategories" "pc" on "pc"."product_id" = "p"."id"
+left join "categories" "c" on "c"."id" = "pc"."categorie_id";
+
+--right join
+select "p"."name_product", "price", "c"."name" as "categoryName"
+from "products" "p"
+right join "productCategories" "pc" on "pc"."product_id" = "p"."id"
+right join "categories" "c" on "c"."id" = "pc"."categorie_id";
+
+
 
 
 
