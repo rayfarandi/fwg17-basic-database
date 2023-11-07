@@ -72,8 +72,28 @@ add "created_at" timestamp default now() not null,
 add "update_at" timestamp;
 
 
+--baris mulai perbaikan
 
+alter table "product" rename to "products" ;
+alter table "products" alter column "price" type numeric(10,2);
+alter table "products" alter column "description_product" type text;
+alter table "products" drop column "category";
+alter table "products" add column "is_available" boolean;
+alter table "products" rename column "product_id" to "id";
 
+alter table "promo" rename column "promo_id" to "id"; 
+alter table "promo" rename column "id;" to "id";
+alter table "promo" rename column "name_promo" to "vocher_id";
+alter table "promo" add column "description" text;
+
+create table if not exists "categories"(
+	"id" serial primary key,
+	"name" varchar (50) not null,
+	"description" text,
+	"promo_id" int references "promo" ("id"),
+	"created_at" timestamp default now(),
+	"update_at" timestamp
+);
 
 
 
