@@ -95,6 +95,40 @@ create table if not exists "categories"(
 	"update_at" timestamp
 );
 
+create table if not exists "productCategories"(
+	"id" serial primary key,
+	"product_id" int references "products"("id"),
+	"categorie_id" int references "categories"("id"),
+	"created_at" timestamp default now(),
+	"update_at" timestamp
+);
+
+alter table "products" add column "image" varchar;
+
+alter table "products" alter column "stok_quantity" drop not null;
+
+insert into "products"("name_product","price","stok_quantity","is_available","description_product","image")
+values
+  ('Espresso', 25000, null, true, 'Single shot of espresso', null),
+  ('Cappuccino', 30000, null, true, 'Espresso steamed milk and foam', null),
+  ('Latte', 35000, null, true, 'Espresso and steamed milk with a small amount of foam', null),
+  ('Mocha', 38000, null, true, 'Espresso steamed milk chocolate and whipped cream', null),
+  ('Americano', 22000, null, true, 'Diluted espresso with hot water', null),
+  ('Macchiato', 28000, null, true, 'Espresso stained or marked with a small amount of foam', null),
+  ('Iced Coffee', 26000, null, true, 'Chilled brewed coffee served over ice', null),
+  ('Caramel Frappuccino', 40000, null, true, 'Blended coffee caramel milk  ice topped  whipped cream', null),
+  ('Irish Coffee', 32000, null, true, 'Hot coffee Irish whiskey sugar topped  cream', null),
+  ('Chai Latte', 36000, null, true, 'Black tea spices steamed milk', null);
+ 
+ insert into "categories" ("name","description") 
+ values ('Coffee', 'A category for various types of coffee beverages.'),
+  ('Non-Coffee', 'A category for non-coffee beverages.'),
+  ('Tea', 'A category for various types of tea beverages.');
+
+insert into "productCategories" ("product_id","categorie_id")
+values (1,1),(2,1),(4,1),(5,1),(6,1),(7,1),(8,1),(9,1),(10,1),(11,1),(12,1),(13,1);
+
+select "name_product" as "productName","price"  from "products" where "name_product" ilike '%%' ; 
 
 
 
