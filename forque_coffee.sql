@@ -49,12 +49,28 @@ values ('ran1','ran1@gmail.com','fazztrack','ranran','1994-02-14','877777756');
 insert into "user" ("username","email","password","full_name","birthday","phone_number")
 values ('ran','ran@gmail.com','fazztrack','ranran','1994-02-14','0877777756');
 
-ALTER TABLE public."user" ALTER COLUMN "phone_number" TYPE varchar(15) USING phone_number::varchar;
+alter table public."user" alter column "phone_number" type varchar(15) using phone_number::varchar;
 
 delete from public."user" where "user_id" = 1; 
 
 insert into "order" ("user_id","total_amount","status")
 values ('2','70000','selesa');
+
+
+alter table "user"
+add "created_at" timestamp default now() not null,
+add "update_at" timestamp;
+
+update "user" set "birthday" = '1994-09-15', "update_at"= 'now()' where "user_id"=2;
+
+alter table "order"
+add "created_at" timestamp default now() not null,
+add "update_at" timestamp;
+
+alter table "promo"
+add "created_at" timestamp default now() not null,
+add "update_at" timestamp;
+
 
 
 
